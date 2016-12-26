@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="basicstruts2" extends="struts-default">
+        <action name="index" class="action.EventAction" method="index">
+            <result name="success">/index.jsp</result>
+            <result name="error">/index.jsp</result>
+        </action>
+        <action name="register" class="action.AccountAction" method="register">
+            <result name="success">/login.jsp</result>
+            <result name="error">/register.jsp</result>
+        </action>
+        <action name="login" class="action.AccountAction" method="login">
+            <result name="success" type="redirect">index.action</result>
+            <result name="admin" type="redirect">admin.action</result>
+            <result name="error">/login.jsp</result>
+        </action>
+        <action name="logout" class="action.AccountAction" method="logout">
+            <result type="chain">index</result>
+        </action>
+        <action name="admin" class="action.EventAction" method="admin">
+            <result name="success">/admin.jsp</result>
+            <result name="error">/admin.jsp</result>
+        </action>
+
+
+        <!--用户个人主页-->
+        <action name="profile" class="action.UserAction" method="profile">
+            <result name="success">/profile.jsp</result>
+            <result name="error">/profile.jsp</result>
+        </action>
+        <action name="password" class="action.UserAction" method="password">
+            <result name="success">/login.jsp</result>
+            <result name="error">/profile.jsp</result>
+        </action>
+        <action name="uploadicon" class="action.UploadAction" method="icon">
+            <result name="success" type="chain">profile</result>
+            <result name="error" type="chain">profile</result>
+        </action>
+        <!--用户个人主页-->
+
+        <!--浏览活动-->
+        <action name="events" class="action.EventAction" method="browse">
+            <result name="success">/events.jsp</result>
+            <result name="error">/events.jsp</result>
+        </action>
+        <action name="category" class="action.EventAction" method="browseByCategory">
+            <result name="success">/events.jsp</result>
+            <result name="error">/events.jsp</result>
+        </action>
+        <action name="searchevents" class="action.EventAction" method="search">
+            <result name="success">/events.jsp</result>
+            <result name="error">/events.jsp</result>
+        </action>
+        <action name="event" class="action.EventAction" method="view">
+            <result name="success">/event.jsp</result>
+            <result name="error" type="redirect">events.action</result>
+        </action>
+        <!--浏览活动-->
+
+
+        <!--发布活动 报名活动 查看发布和报名的活动 评分-->
+        <action name="launch" class="action.EventAction" method="save">
+            <result name="success" type="chain">viewlaunch</result>
+            <result name="error" type="chain">viewlaunch</result>
+        </action>
+        <action name="viewlaunch" class="action.EventAction" method="viewlaunch">
+            <result name="success">/viewlaunch.jsp</result>
+            <result name="error">/viewlaunch.jsp</result>
+        </action>
+        <action name="cancelevent" class="action.EventAction" method="cancelevent">
+            <result name="success" type="chain">viewlaunch</result>
+            <result name="error" type="chain">viewlaunch</result>
+        </action>
+        <action name="join" class="action.TakeAction" method="save">
+            <result name="success" type="chain">viewjoin</result>
+            <result name="error" type="chain">viewjoin</result>
+        </action>
+        <action name="viewjoin" class="action.TakeAction" method="viewjoin">
+            <result name="success">/viewjoin.jsp</result>
+            <result name="error">/viewjoin.jsp</result>
+        </action>
+        <action name="canceljoin" class="action.TakeAction" method="canceljoin">
+            <result name="success" type="chain">viewjoin</result>
+            <result name="error" type="chain">viewjoin</result>
+        </action>
+        <action name="mark" class="action.TakeAction" method="mark">
+            <result name="success" type="redirect">viewjoin.action</result>
+            <result name="error" type="redirect">viewjoin.action</result>
+        </action>
+        <!--发布活动 报名活动 查看发布和报名的活动-->
+
+
+        <!--管理员审核新活动 通过/未通过-->
+        <action name="pass" class="action.EventAction" method="pass">
+            <result name="success" type="chain">admin</result>
+            <result name="error" type="chain">admin</result>
+        </action>
+        <action name="fail" class="action.EventAction" method="fail">
+            <result name="success" type="chain">admin</result>
+            <result name="error" type="chain">admin</result>
+        </action>
+        <action name="manage" class="action.EventAction" method="manage">
+            <result name="success">/manage.jsp</result>
+            <result name="error">/manage.jsp</result>
+        </action>
+        <action name="deleteevent" class="action.EventAction" method="deleteevent">
+            <result name="success" type="redirect">manage.action</result>
+            <result name="error" type="redirect">manage.action</result>
+        </action>
+        <!--管理员审核新活动-->
+
+        <action name="verify" class="action.UserAction" method="searchall">
+            <result name="success">/verify.jsp</result>
+            <result name="error">/verify.jsp</result>
+        </action>
+        <action name="searchusers" class="action.UserAction" method="adminsearch">
+            <result name="success">/verify.jsp</result>
+            <result name="error">/verify.jsp</result>
+        </action>
+        <action name="banlaunch" class="action.UserAction" method="banlaunch">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="restorelaunch" class="action.UserAction" method="restorelaunch">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="banjoin" class="action.UserAction" method="banjoin">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="restorejoin" class="action.UserAction" method="restorejoin">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="baninvite" class="action.UserAction" method="baninvite">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="restoreinvite" class="action.UserAction" method="restoreinvite">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="bancomment" class="action.UserAction" method="bancomment">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+        <action name="restorecomment" class="action.UserAction" method="restorecomment">
+            <result name="success" type="redirect">verify.action</result>
+            <result name="error" type="redirect">verify.action</result>
+        </action>
+
+        <!--活动管理员管理活动 截止报名 查看报名者 确认（全部）/拒绝 取消 签到-->
+        <action name="stop" class="action.EventAction" method="stop">
+            <result name="success" type="chain">viewlaunch</result>
+            <result name="error" type="chain">viewlaunch</result>
+        </action>
+        <action name="participant" class="action.TakeAction" method="participant">
+            <result name="success">/participant.jsp</result>
+            <result name="error" type="chain">viewlaunch</result>
+        </action>
+        <action name="checkin" class="action.TakeAction" method="checkin">
+            <result name="success" type="chain">participant</result>
+            <result name="error" type="chain">viewlaunch</result>
+        </action>
+        <action name="accept" class="action.TakeAction" method="accept">
+            <result name="success" type="chain">participant</result>
+            <result name="error" type="chain">participant</result>
+        </action>
+        <action name="acceptall" class="action.TakeAction" method="acceptall">
+            <result name="success" type="chain">participant</result>
+            <result name="error" type="chain">participant</result>
+        </action>
+        <action name="acceptByGrade" class="action.TakeAction" method="acceptgrade">
+            <result name="success" type="chain">participant</result>
+            <result name="error" type="chain">participant</result>
+        </action>
+        <action name="refuse" class="action.TakeAction" method="refuse">
+            <result name="success" type="chain">participant</result>
+            <result name="error" type="chain">participant</result>
+        </action>
+        <action name="cancel" class="action.TakeAction" method="cancel">
+            <result name="success" type="chain">participant</result>
+            <result name="error" type="chain">participant</result>
+        </action>
+        <!--活动管理员管理活动-->
+
+        <!--管理好友-->
+        <action name="search" class="action.UserAction" method="search">
+            <result name="success">/search.jsp</result>
+            <result name="error">/search.jsp</result>
+        </action>
+        <action name="applyfriend" class="action.MessageAction" method="apply">
+            <result name="success" type="chain">search</result>
+            <result name="error" type="chain">search</result>
+        </action>
+        <action name="acceptfriend" class="action.FriendAction" method="accept">
+            <result name="success" type="chain">message</result>
+            <result name="error" type="chain">message</result>
+        </action>
+        <action name="deletefriend" class="action.FriendAction" method="delete">
+            <result name="success" type="chain">friend</result>
+            <result name="error" type="chain">friend</result>
+        </action>
+        <!--管理好友-->
+
+        <!--邀请好友参加活动-->
+        <action name="friend" class="action.UserAction" method="viewfriends">
+            <result name="success">/friends.jsp</result>
+            <result name="error">/friends.jsp</result>
+        </action>
+        <action name="invite" class="action.UserAction" method="viewfriends">
+            <result name="success">/invite.jsp</result>
+            <result name="error">/invite.jsp</result>
+        </action>
+        <action name="sendinvite" class="action.MessageAction" method="invite">
+            <result name="success" type="chain">invite</result>
+            <result name="error" type="chain">invite</result>
+        </action>
+        <!--邀请好友参加活动-->
+
+
+        <action name="message" class="action.MessageAction" method="browse">
+            <result name="success">/message.jsp</result>
+            <result name="error">/message.jsp</result>
+        </action>
+        <action name="deletemessage" class="action.MessageAction" method="delete">
+            <result name="success" type="chain">message</result>
+            <result name="error" type="chain">message</result>
+        </action>
+
+        <!--评论相关-->
+        <action name="comment" class="action.CommentAction" method="comment">
+            <result name="success" type="chain">event</result>
+            <result name="error" type="chain">event</result>
+        </action>
+        <action name="viewcomment" class="action.CommentAction" method="viewcomment">
+            <result name="success">/viewcomment.jsp</result>
+            <result name="error">/viewcomment.jsp</result>
+        </action>
+        <action name="answer" class="action.CommentAction" method="answer">
+            <result name="success" type="chain">viewcomment</result>
+            <result name="error" type="chain">viewcomment</result>
+        </action>
+        <action name="deletecomment" class="action.CommentAction" method="delete">
+            <result name="success" type="chain">viewcomment</result>
+            <result name="error" type="chain">viewcomment</result>
+        </action>
+        <!--评论相关-->
+    </package>
+</struts>
